@@ -35,6 +35,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS',cast=Csv())
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'main.apps.MainConfig',
+    'crispy_forms',
     'bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -133,3 +134,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
