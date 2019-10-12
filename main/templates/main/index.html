@@ -1,5 +1,10 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-    <h1 class="text-center">WELCOME HOME</h1>
+    {% if images %}
+        {% for image in images %}
+            <img src="{{ image.image.url }}" alt="">
+            <p>{{ image.image_caption }}</p>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
