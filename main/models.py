@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Image(models.Model):
@@ -10,6 +11,12 @@ class Image(models.Model):
     image_name = models.CharField(max_length=30)
     image_caption=models.CharField(max_length=300,blank=True)
     profile = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        '''
+        Gets the absolute url for the Image created so as to enable redirect to image created route
+        '''
+        return reverse('image_detail',kwargs={'pk':self.pk})
 
     def __str__(self):
         return self.image_name
