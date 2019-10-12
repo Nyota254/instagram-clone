@@ -2,6 +2,10 @@
 
 {% block content %}
     <img src="{{ object.image.url }}" alt="">
+    {% if object.profile == user %}
+        <a href="{% url 'image_update' object.id %}" class="btn btn-secondary btn-sm">Update</a>
+        <a href="{% url 'image_delete' object.id %}" class="btn btn-danger btn-sm">Delete</a>
+    {% endif %}
     <p>{{ object.image_name }}</p>
     <p>{{ object.image_caption }}</p>
 {% endblock %}
