@@ -3,7 +3,7 @@
 {% block content %}
     {% if images %}
         {% for image in images %}
-            <a href="{% url 'image_detail' image.id%}"><img src="{{ image.image.url }}" alt=""></a>
+            <a href="{% url 'image_detail' image.id%}"><img src="{{ image.image.url }}" alt="{{ image.image_name }} image"></a>
             <p>{{ image.image_caption }}</p>
         {% endfor %}
     {% endif %}
