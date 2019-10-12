@@ -2,8 +2,11 @@ from django.shortcuts import render
 from django.views.generic import (
     ListView,
     DetailView,
-    CreateView
+    CreateView,
+    UpdateView,
+    DeleteView
 )
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from .models import Image
 
 
@@ -22,9 +25,9 @@ class ImageDetailView(DetailView):
     '''
     model = Image
 
-class ImageCreateView(CreateView):
+class ImageCreateView(LoginRequiredMixin,CreateView):
     '''
-    Class based view for addind new image
+    Class based view for adding new image
     '''
     model = Image
     fields = ['image','image_name','image_caption']
@@ -35,3 +38,43 @@ class ImageCreateView(CreateView):
         '''
         form.instance.profile = self.request.user
         return super().form_valid(form)
+
+
+class ImageUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+    '''
+    Class based view for updating new image
+    '''
+    model = Image
+    fields = ['image','image_name','image_caption']
+
+    def form_valid(self,form):
+        '''
+        form overide to set user who uploaded image
+        '''
+        form.instance.profile = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        '''
+        Function run by userpassestestmixin to check if user passes test to be able to update image
+        '''
+        image = self.get_object()
+        if self.request.user == image.profile:
+            return True
+        return False
+
+class ImageDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
+    '''
+    class based view to delete image object
+    '''
+    model = Image
+    success_url = '/'
+
+    def test_func(self):
+        '''
+        Function run by userpassestestmixin to check if user passes test to be able to delete image
+        '''
+        image = self.get_object()
+        if self.request.user == image.profile:
+            return True
+        return False
