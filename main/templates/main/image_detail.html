@@ -1,11 +1,25 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-    <img src="{{ object.image.url }}" alt="">
-    {% if object.profile == user %}
-        <a href="{% url 'image_update' object.id %}" class="btn btn-secondary btn-sm">Update</a>
-        <a href="{% url 'image_delete' object.id %}" class="btn btn-danger btn-sm">Delete</a>
-    {% endif %}
-    <p>{{ object.image_name }}</p>
-    <p>{{ object.image_caption }}</p>
+<div class="container">   
+    <div class="card">
+            <div class="card-heading">
+                <div class="placing">
+            <a href="{% url 'profile' %}"><img src="{{ object.profile.profile.profile_pic.url }}" alt="profile picture" class="rounded-circle custom-display border border-danger"></a>
+            <p class="ml-3">{{ image.profile.username }}</p>
+        </div>
+            </div><hr>
+            <div  class="card-body">
+            <a href="{% url 'image_detail' image.id%}"><img src="{{ object.image.url }}" alt="{{ image.image_name }} image" class="display-images img-fluid"></a>
+            <p>{{ object.image_name }}: {{ object.image_caption }}</p>
+        </div>
+        <div class="card-footer">
+                {% if object.profile == user %}
+                <a href="{% url 'image_update' object.id %}" class="btn btn-secondary btn-sm">Update</a>
+                <a href="{% url 'image_delete' object.id %}" class="btn btn-danger btn-sm">Delete</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
 {% endblock %}

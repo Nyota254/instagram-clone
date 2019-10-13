@@ -1,10 +1,35 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
     {% if images %}
         {% for image in images %}
-            <a href="{% url 'image_detail' image.id%}"><img src="{{ image.image.url }}" alt="{{ image.image_name }} image"></a>
+        <div class="card">
+            <div class="card-heading">
+                <div class="placing">
+            <a href="{% url 'profile' %}"><img src="{{ image.profile.profile.profile_pic.url }}" alt="profile picture" class="rounded-circle custom-display border border-danger"></a>
+            <p class="ml-3">{{ image.profile.username }}</p>
+        </div>
+            </div><hr>
+            <div  class="card-body">
+            <a href="{% url 'image_detail' image.id%}"><img src="{{ image.image.url }}" alt="{{ image.image_name }} image" class="display-images img-fluid"></a>
             <p>{{ image.image_caption }}</p>
+        </div>
+        <div class="card-footer">
+                {% if image.profile == user %}
+                <a href="{% url 'image_update' image.id %}" class="btn btn-secondary btn-sm">Update</a>
+                <a href="{% url 'image_delete' image.id %}" class="btn btn-danger btn-sm">Delete</a>
+            {% endif %}
+        </div>
+        </div><br><br><br>
         {% endfor %}
     {% endif %}
+</div>
+<div class="col-md-2"></div>
+<div class="col-md-4">
+</div>
+</div>
+</div>
 {% endblock %}
