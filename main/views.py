@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic import (
     ListView,
     DetailView,
@@ -10,16 +10,44 @@ from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from .models import Image
 from users.models import Profile
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from .forms import CommentForm
 
 
-class ImageListView(LoginRequiredMixin,ListView):
+# class ImageListView(LoginRequiredMixin,ListView):
+#     '''
+#     class based view to display uploaded images
+#     '''
+#     model = Image
+#     template_name = 'main/index.html'
+#     context_object_name = 'images'
+#     ordering = ['-pk']
+@login_required
+def Index_View(request):
     '''
-    class based view to display uploaded images
+    function based view to display index page
     '''
-    model = Image
-    template_name = 'main/index.html'
-    context_object_name = 'images'
-    ordering = ['-pk']
+    form = CommentForm()
+    images = Image.objects.all().order_by('-pk')
+    return render(request,'main/index.html',{'images':images,"form":form})
+
+@login_required
+def CommentOnImage(request,pk):
+    '''
+    View for commenting on a specfic image
+    '''
+    current_user = request.user
+    current_image = Image.objects.get(id=pk)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = current_user
+            comment.image = current_image
+            comment.save()
+            return redirect(Index_View)
+    else:       
+        return redirect(Index_View)
 
 class ImageDetailView(LoginRequiredMixin,DetailView):
     '''
@@ -30,6 +58,8 @@ class ImageDetailView(LoginRequiredMixin,DetailView):
 # class PersonalProfileView(LoginRequiredMixin,DetailView):
 #     pass
 
+
+@login_required
 def OtherProfile(request,pk):
     '''
     Function to display user profile
@@ -42,6 +72,7 @@ def OtherProfile(request,pk):
     }
     return render(request,"main/profileview.html",context)
 
+@login_required
 def ImageSearch(request):
     '''
     Function to search for images by name

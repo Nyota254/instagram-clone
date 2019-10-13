@@ -15,23 +15,24 @@
             </div><hr>
             <div  class="card-body">
             <a href="{% url 'image_detail' image.id%}"><img src="{{ image.image.url }}" alt="{{ image.image_name }} image" class="display-images img-fluid"></a>
-            <p>{{ image.image_caption }}</p>
+            <br><br>
+            <p>{{ image.image_caption }}</p><br>
+            <p>comments:</p>
+            {% if image.comment_set.all %}
+              {% for comment in image.comment_set.all %}
+                <p><a href="{% url 'single_profile' comment.user.profile.id %}"><img src="{{ comment.user.profile.profile_pic.url }}" alt="profile picture" class="rounded-circle custom-display border border-danger"></a><strong>{{ comment.user.username }}</strong>:  {{ comment.comment }}</p>
+              {% endfor %}
+            {% endif %}
         </div>
         <div class="card-footer">
                 {% if image.profile == user %}
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#image{{ image.id }}">
+                <button type="button"  data-toggle="modal" data-target="#image{{ image.id }}">
                         <i class="fa fa-cogs"></i>
                       </button>
 
                       <div class="modal fade" id="image{{ image.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                               <div class="modal-content">
-                                <!-- <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLongTitle">Picture Update</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div> -->
                                 <div class="modal-body">
                                     <div class="text-center">
                                         <a href="{% url 'image_update' image.id %}">Update</a><hr>
@@ -42,9 +43,11 @@
                             </div>
                           </div>
             {% endif %}
-            <!-- <form action="">
-
-            </form> -->
+            <form method="POST" class="form-inline" action="{% url 'image-comment'  image.id %}">
+              {% csrf_token %}
+                {{form}}
+                <input type="submit" class="btn btn-success btn-sm" value="Post">
+            </form>
         </div>
         </div><br><br><br>
         {% endfor %}
