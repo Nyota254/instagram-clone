@@ -8,6 +8,8 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from .models import Image
+from users.models import Profile
+from django.contrib.auth.models import User
 
 
 class ImageListView(LoginRequiredMixin,ListView):
@@ -24,6 +26,23 @@ class ImageDetailView(LoginRequiredMixin,DetailView):
     Class based view for viewing specific image with its details
     '''
     model = Image
+
+# class PersonalProfileView(LoginRequiredMixin,DetailView):
+#     pass
+
+def OtherProfile(request,pk):
+    '''
+    Function to display user profile
+    '''
+    user = User.objects.get(pk=pk)
+    images = Image.objects.filter(profile=user)
+    context = {
+        "user":user,
+        "images":images
+    }
+    return render(request,"main/profileview.html",context)
+
+
 
 class ImageCreateView(LoginRequiredMixin,CreateView):
     '''

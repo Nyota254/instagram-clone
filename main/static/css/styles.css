@@ -38,3 +38,22 @@ body {
 .custom-icon {
     color: black;
 }
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+}
+
+#profile-images {
+    height: 300px;
+    width: 300px;
+    padding: 10px;
+}
+
+.hide-button {
+    visibility: hidden;
+}
+
+.custom-center {
+    padding-left: 250px;
+}

@@ -3,11 +3,12 @@
 
 
 {% block content %}
+<div class="container">
 <div class="row">
     <div class="col-md-4">
     <div class="content-section">
         <div class="media">
-            <img src="{{ user.profile.profile_pic.url }}" alt="profile image" class="rounded-circle account-img">
+            <img src="{{ user.profile.profile_pic.url }}" alt="profile image" class="rounded-circle profile-img">
             <div class="media-body">
                 <h2 class="account-heading ml-4">Username: {{ user.username }}</h2>
                 <p class="text-secondary ml-4"> Email: {{ user.email }}</p>
@@ -28,5 +29,6 @@
     </div>
 </div>
 <div class="col-md-8"></div>
+</div>
 </div>
 {% endblock %}
