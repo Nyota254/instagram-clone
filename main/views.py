@@ -10,7 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from .models import Image
 
 
-class ImageListView(ListView):
+class ImageListView(LoginRequiredMixin,ListView):
     '''
     class based view to display uploaded images
     '''
@@ -19,7 +19,7 @@ class ImageListView(ListView):
     context_object_name = 'images'
     ordering = ['-pk']
 
-class ImageDetailView(DetailView):
+class ImageDetailView(LoginRequiredMixin,DetailView):
     '''
     Class based view for viewing specific image with its details
     '''
