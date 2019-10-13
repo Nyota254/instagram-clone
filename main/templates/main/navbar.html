@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand h1-custom" href="/"><i class="fab fa-instagram"></i> | Insta-clone</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Lets explore
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'image_upload' %}">Add image</a>
+                <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
+                <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+                 </div>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          {% else %}
+          <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'login' %}" class="nav-link">Sign In</a>
+              </li>
+          {% endif %}
+        </div>
+      </nav>
+
+
+<!-- <div class="navbar fixed-top">
+        <nav class="container">
+          <span class="navbar-brand mb-0 h1">
+              <a href="/">
+                  <div id="brand" class="instaicon logo d-none d-sm-block"></div>
+                  <div class="instaicon mainicon d-block d-sm-none"></div>
+              </a>
+          </span>
+            <form class="mb-0 h1 ml-auto mr-auto" id="searchform" >
+                 <input name="search" autocomplete="off" id="searching" class="form-control d-none d-md-block" placeholder=" &#xF002; Search">
+                <i class="spinner "></i>
+            </form>
+            <span class="">
+                <div class="instaicon disc"></div>
+                <div class="instaicon like"></div>
+                <a href="{% url 'profile' %}" class=""></a>
+            </span>
+        </nav>
+    </div> -->
