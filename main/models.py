@@ -42,7 +42,13 @@ class Image(models.Model):
         '''
         pass
 
-
+    @classmethod
+    def search_by_name(self,searched_image):
+        '''
+        Searches for images using names
+        '''
+        searched_images = self.objects.filter(image_name__icontains=searched_image)
+        return searched_images
 
 class Likes(models.Model):
     '''

@@ -42,6 +42,18 @@ def OtherProfile(request,pk):
     }
     return render(request,"main/profileview.html",context)
 
+def ImageSearch(request):
+    '''
+    Function to search for images by name
+    '''
+    if 'image' in request.GET and request.GET['image']:
+        searched_image = request.GET.get('image')
+        searched_images = Image.search_by_name(searched_image)
+        message = f"{searched_image}"
+        return render(request,'main/search.html',{"message":message,"images":searched_images,})
+    else:
+        message = "blank"
+        return render(request,'main/search.html',{"messsage":message})
 
 
 class ImageCreateView(LoginRequiredMixin,CreateView):

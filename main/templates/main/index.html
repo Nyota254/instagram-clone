@@ -9,7 +9,7 @@
         <div class="card">
             <div class="card-heading">
                 <div class="placing">
-            <a href="{% url 'profile' %}"><img src="{{ image.profile.profile.profile_pic.url }}" alt="profile picture" class="rounded-circle custom-display border border-danger"></a>
+            <a href="{% url 'single_profile' image.profile.id %}"><img src="{{ image.profile.profile.profile_pic.url }}" alt="profile picture" class="rounded-circle custom-display border border-danger"></a>
             <p class="ml-3">{{ image.profile.username }}</p>
         </div>
             </div><hr>
@@ -42,6 +42,9 @@
                             </div>
                           </div>
             {% endif %}
+            <!-- <form action="">
+
+            </form> -->
         </div>
         </div><br><br><br>
         {% endfor %}
