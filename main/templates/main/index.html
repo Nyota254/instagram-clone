@@ -16,6 +16,10 @@
             <div  class="card-body">
             <a href="{% url 'image_detail' image.id%}"><img src="{{ image.image.url }}" alt="{{ image.image_name }} image" class="display-images img-fluid"></a>
             <br><br>
+            <p>
+              <a href="{% url 'image-like' image.id %}"><i class="fa fa-heart" ></i></a> 
+                 | {{ image.likes_set.all|length }}    <i class="fa fa-comments"></i> | {{ image.comment_set.all|length }}
+              </p>
             <p>{{ image.image_caption }}</p><br>
             <p>comments:</p>
             {% if image.comment_set.all %}
@@ -56,6 +60,10 @@
 </div>
 <div class="col-md-2"></div>
 <div class="col-md-4">
+    <div class="placing side-view">
+        <a href="{% url 'single_profile' user.profile.id %}"><img src="{{ user.profile.profile_pic.url }}" alt="profile picture" class="rounded-circle custom-display border border-danger"></a>
+        <p class="ml-3">{{ user.profile.user }}</p>
+    </div>
 </div>
 </div>
 </div>

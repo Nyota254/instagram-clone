@@ -8,7 +8,8 @@ from .views import (
     OtherProfile,
     ImageSearch,
     Index_View,
-    CommentOnImage
+    CommentOnImage,
+    Like,
 )
 
 
@@ -20,5 +21,6 @@ urlpatterns = [
     re_path(r'^image/(?P<pk>\d+)/delete',ImageDeleteView.as_view(),name="image_delete"),
     re_path(r'^user/(?P<pk>\d+)',OtherProfile,name="single_profile"),
     re_path(r'^search/$',ImageSearch,name="search-results"),
-    re_path(r'^comment/(?P<pk>\d+)',CommentOnImage,name="image-comment")
+    re_path(r'^comment/(?P<pk>\d+)',CommentOnImage,name="image-comment"),
+    re_path(r'^like/(?P<pk>\d+)',Like,name="image-like"),
 ]

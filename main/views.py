@@ -7,7 +7,7 @@ from django.views.generic import (
     DeleteView
 )
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
-from .models import Image
+from .models import Image,Likes
 from users.models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -28,8 +28,9 @@ def Index_View(request):
     function based view to display index page
     '''
     form = CommentForm()
+    all_likes = Likes.objects.all()
     images = Image.objects.all().order_by('-pk')
-    return render(request,'main/index.html',{'images':images,"form":form})
+    return render(request,'main/index.html',{'images':images,"form":form,"likes":all_likes})
 
 @login_required
 def CommentOnImage(request,pk):
@@ -128,6 +129,7 @@ class ImageUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
 
 
 class ImageDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
+
     '''
     class based view to delete image object
     '''
@@ -142,3 +144,21 @@ class ImageDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
         if self.request.user == image.profile:
             return True
         return False
+
+@login_required
+def Like(request,pk):
+    '''
+    Implements the like functionality in the app
+    '''
+    current_user = request.user
+    likes = Likes.objects.filter(user=current_user).first()
+    if likes == None:
+        image = Image.objects.get(pk=pk)
+        current_user = request.user
+        user_likes = Likes(user=current_user,image=image)
+        user_likes.save()
+        return redirect(Index_View)
+    else:
+        likes.delete()
+        return redirect(Index_View)
+
