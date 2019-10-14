@@ -1,7 +1,9 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-<div class="container">   
+<div class="container"> 
+    <div class="row"> 
+        <div class="col-md-8">
     <div class="card">
             <div class="card-heading">
                 <div class="placing">
@@ -20,6 +22,15 @@
             {% endif %}
         </div>
     </div>
+</div>
+<div class="col-md-4">
+    {% if object.comment_set.all %}
+        {% for comment in object.comment_set.all %}
+            <p><a href="{% url 'single_profile' comment.user.profile.id %}"><img src="{{ comment.user.profile.profile_pic.url }}" alt="profile picture" class="rounded-circle custom-display border border-danger"></a><strong>{{ comment.user.username }}</strong>:  {{ comment.comment }}</p>
+        {% endfor %}
+    {% endif %}
+</div>
+</div> 
 </div>
 
 {% endblock %}

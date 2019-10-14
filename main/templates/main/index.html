@@ -19,9 +19,10 @@
             <p>{{ image.image_caption }}</p><br>
             <p>comments:</p>
             {% if image.comment_set.all %}
-              {% for comment in image.comment_set.all %}
+              {% for comment in image.comment_set.all|slice:"2" %}
                 <p><a href="{% url 'single_profile' comment.user.profile.id %}"><img src="{{ comment.user.profile.profile_pic.url }}" alt="profile picture" class="rounded-circle custom-display border border-danger"></a><strong>{{ comment.user.username }}</strong>:  {{ comment.comment }}</p>
               {% endfor %}
+              <a href="{% url 'image_detail' image.id %}"><p>View all {{ image.comment_set.all|length }} comments</p></a>
             {% endif %}
         </div>
         <div class="card-footer">

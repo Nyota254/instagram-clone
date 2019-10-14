@@ -72,6 +72,7 @@ def OtherProfile(request,pk):
     }
     return render(request,"main/profileview.html",context)
 
+
 @login_required
 def ImageSearch(request):
     '''
@@ -124,6 +125,7 @@ class ImageUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
         if self.request.user == image.profile:
             return True
         return False
+
 
 class ImageDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     '''
