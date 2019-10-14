@@ -57,3 +57,30 @@ body {
 .custom-center {
     padding-left: 250px;
 }
+
+.ml-custom {
+    margin-left: 100px;
+}
+
+.custom-fontsize {
+    font-size: 50px;
+}
+
+.custom-placing{
+    display: flex;
+}
+
+.fa-heart {
+    color: red;
+    font-size: 40px;
+}
+
+.fa-comments{
+    color:blue;
+    font-size: 40px;
+    padding-left: 2px;
+}
+
+.side-view {
+    padding-top: 50px;
+}
