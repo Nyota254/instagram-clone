@@ -11,7 +11,7 @@
                 <div class="ml-custom">
                 <div class="display">
                 <p class="custom-fontsize">{{ user.username }}
-                {% if user == user %}
+                {% if current_user.profile == user.profile %}
                     <a href="{% url 'profile' %}" ><button class="btn btn-outline-primary">Edit Profile</button></a>
                 {% endif %}
                 <a class="fa fa-sun-o" aria-hidden="true"  data-toggle="modal" data-target="#exampleModalCenter"></a>

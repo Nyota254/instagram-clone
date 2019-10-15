@@ -68,11 +68,13 @@ def OtherProfile(request,pk):
     '''
     user = User.objects.get(pk=pk)
     users = User.objects.all()
+    current_user = request.user
     images = Image.objects.filter(profile=user)
     context = {
         "user":user,
         "images":images,
-        "users":users
+        "users":users,
+        "current_user":current_user
     }
     return render(request,"main/profileview.html",context)
 
