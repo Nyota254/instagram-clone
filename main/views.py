@@ -29,8 +29,9 @@ def Index_View(request):
     '''
     form = CommentForm()
     all_likes = Likes.objects.all()
+    users = User.objects.all()
     images = Image.objects.all().order_by('-pk')
-    return render(request,'main/index.html',{'images':images,"form":form,"likes":all_likes})
+    return render(request,'main/index.html',{'images':images,"form":form,"likes":all_likes,"users":users})
 
 @login_required
 def CommentOnImage(request,pk):
@@ -66,10 +67,12 @@ def OtherProfile(request,pk):
     Function to display user profile
     '''
     user = User.objects.get(pk=pk)
+    users = User.objects.all()
     images = Image.objects.filter(profile=user)
     context = {
         "user":user,
-        "images":images
+        "images":images,
+        "users":users
     }
     return render(request,"main/profileview.html",context)
 
