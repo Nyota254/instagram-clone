@@ -26,6 +26,10 @@
     display: flex;
 }
 
+/* .card-heading {
+    background-image: url(../siteimages/banner.jpeg);
+} */
+
 body {
     padding-top: 100px;
 }
@@ -83,4 +87,18 @@ body {
 
 .side-view {
     padding-top: 50px;
+}
+
+.overflowstyle {
+    overflow:auto;
+    height:200px;
+    width: 200px;
+}
+
+.fa-sun-o {
+    font-size: 40px;
+}
+
+#pad-left {
+    padding-left: 20px;
 }
