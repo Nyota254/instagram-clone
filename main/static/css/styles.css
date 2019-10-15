@@ -95,10 +95,14 @@ body {
     width: 200px;
 }
 
-.fa-sun-o {
+.fa-sun-o{
     font-size: 40px;
 }
 
 #pad-left {
     padding-left: 20px;
+}
+
+.fa-upload {
+    font-size: 40px;
 }
