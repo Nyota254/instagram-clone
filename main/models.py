@@ -21,21 +21,21 @@ class Image(models.Model):
     def __str__(self):
         return self.image_name
 
-    @classmethod
+    
     def save_image(self):
         '''
         Saves an Image in the db
         '''
         self.save()
 
-    @classmethod
+    
     def delete_image(self):
         '''
         Deletes an image model from the db
         '''
         self.delete()
 
-    @classmethod
+    
     def update_caption(self):
         '''
         Saves a caption from the db
