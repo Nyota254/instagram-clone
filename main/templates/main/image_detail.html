@@ -9,6 +9,12 @@
                 <div class="placing">
             <a href="{% url 'profile' %}"><img src="{{ object.profile.profile.profile_pic.url }}" alt="profile picture" class="rounded-circle custom-display border border-danger"></a>
             <p class="ml-3">{{ image.profile.username }}</p>
+            {% if object.profile == user %}
+            <div class="float-right">
+                <a href="{% url 'image_update' object.id %}" class="btn btn-secondary btn-sm">Update</a>
+                <a href="{% url 'image_delete' object.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </div>
+            {% endif %}
         </div>
             </div><hr>
             <div  class="card-body">
